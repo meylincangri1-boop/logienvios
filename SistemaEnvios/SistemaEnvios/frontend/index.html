@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LogiEnvíos: sistema de gestión y seguimiento de envíos para pequeños comercios y emprendimientos.">
+    <title>LogiEnvíos | Gestión de envíos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#inicio" data-page="inicio">
+            <span class="brand-symbol">L</span>
+            <span class="brand-copy">
+                <strong>LogiEnvíos</strong>
+                <small>GESTIÓN INTELIGENTE</small>
+            </span>
+        </a>
+
+        <div class="workspace">
+            <span class="workspace-icon">▦</span>
+            <span><strong>Mi negocio</strong><small>Panel de operaciones</small></span>
+            <span class="workspace-chevron">⌄</span>
+        </div>
+
+        <p class="nav-caption">MENÚ PRINCIPAL</p>
+        <nav class="main-nav" aria-label="Menú principal">
+            <button class="nav-link active" data-page="inicio"><span>▦</span> Resumen</button>
+            <button class="nav-link" data-page="registrar"><span>＋</span> Registrar envío</button>
+            <button class="nav-link" data-page="envios"><span>▤</span> Gestión de envíos</button>
+            <button class="nav-link" data-page="seguimiento"><span>⌕</span> Consultar seguimiento</button>
+            <button class="nav-link" data-page="reportes"><span>▥</span> Reportes</button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="help-card">
+            <div class="help-icon">?</div>
+            <strong>¿Necesitas ayuda?</strong>
+            <p>Consulta cómo registrar y hacer seguimiento a tus envíos.</p>
+            <button id="btnAyuda" class="help-button">Ver guía <span>→</span></button>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="avatar">AD</div>
+            <div class="profile-copy"><strong>Administrador</strong><small>Cuenta de demostración</small></div>
+            <button class="icon-button" id="btnPerfil" aria-label="Información de la cuenta">•••</button>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-toggle" id="btnMenu" aria-label="Abrir menú">☰</button>
+                <div class="breadcrumb"><span>LogiEnvíos</span><span>/</span><strong id="breadcrumbCurrent">Resumen</strong></div>
+            </div>
+            <div class="topbar-right">
+                <span class="system-status"><span class="status-dot"></span> Prototipo activo</span>
+                <button class="icon-button topbar-help" id="btnAyudaTop" aria-label="Ayuda">?</button>
+            </div>
+        </header>
+
+        <div class="page-content">
+
+            <!-- INICIO -->
+            <section class="page-section active" id="page-inicio">
+                <div class="welcome-row">
+                    <div>
+                        <p class="eyebrow">CENTRO DE OPERACIONES</p>
+                        <h1>Resumen de envíos</h1>
+                        <p class="page-subtitle">Controla tus pedidos y mantén la información de cada entrega organizada.</p>
+                    </div>
+                    <button class="btn btn-primary" data-go="registrar"><span>＋</span> Registrar nuevo envío</button>
+                </div>
+
+                <div class="hero-banner">
+                    <div class="hero-content">
+                        <span class="hero-label"><span class="hero-label-dot"></span> CONTROL Y SEGUIMIENTO</span>
+                        <h2>Tus envíos, bajo control.</h2>
+                        <p>Registra pedidos, actualiza sus estados y comparte un código de seguimiento con cada cliente.</p>
+                        <button class="btn btn-light" data-go="registrar">Crear un envío <span>→</span></button>
+                    </div>
+                    <div class="hero-art" aria-hidden="true">
+                        <div class="art-orbit orbit-one"></div>
+                        <div class="art-orbit orbit-two"></div>
+                        <div class="art-package">▧</div>
+                        <div class="art-mini art-mini-one">✓</div>
+                        <div class="art-mini art-mini-two">↗</div>
+                        <div class="art-ground"></div>
+                    </div>
+                </div>
+
+                <div class="section-heading">
+                    <div><h2>Estado de las operaciones</h2><p>Resumen de los envíos registrados en este prototipo.</p></div>
+                    <button class="text-button" data-go="envios">Ver todos los envíos →</button>
+                </div>
+
+                <div class="stats-grid">
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon icon-indigo">▤</span><span class="stat-tag">TOTAL</span></div>
+                        <p class="stat-label">Envíos registrados</p><div class="stat-value" id="statTotal">0</div>
+                        <p class="stat-foot">Todos los pedidos guardados</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon icon-amber">◷</span><span class="stat-tag">PENDIENTES</span></div>
+                        <p class="stat-label">Registrados</p><div class="stat-value" id="statRegistrado">0</div>
+                        <p class="stat-foot">Esperando despacho</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon icon-blue">➜</span><span class="stat-tag">EN PROCESO</span></div>
+                        <p class="stat-label">En envío</p><div class="stat-value" id="statTransito">0</div>
+                        <p class="stat-foot">En camino al destinatario</p>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-icon icon-green">✓</span><span class="stat-tag">COMPLETADOS</span></div>
+                        <p class="stat-label">Entregados</p><div class="stat-value" id="statEntregado">0</div>
+                        <p class="stat-foot">Entregas registradas</p>
+                    </article>
+                </div>
+
+                <div class="content-grid">
+                    <section class="panel recent-panel">
+                        <div class="panel-heading">
+                            <div><h2>Envíos recientes</h2><p>Últimos pedidos registrados en el sistema.</p></div>
+                            <button class="text-button" data-go="envios">Ver lista completa →</button>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead><tr><th>CÓDIGO</th><th>DESTINATARIO</th><th>DESTINO</th><th>ESTADO</th><th></th></tr></thead>
+                                <tbody id="recentTable"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state hidden" id="recentEmpty"><span>▤</span><strong>Aún no tienes envíos</strong><p>Registra tu primer pedido para comenzar.</p><button class="btn btn-primary btn-small" data-go="registrar">Registrar envío</button></div>
+                    </section>
+
+                    <aside class="panel quick-panel">
+                        <div class="panel-heading"><div><h2>Accesos rápidos</h2><p>Funciones principales</p></div></div>
+                        <button class="quick-action" data-go="registrar"><span class="quick-icon qi-purple">＋</span><span><strong>Registrar envío</strong><small>Ingresar un nuevo pedido</small></span><b>→</b></button>
+                        <button class="quick-action" data-go="envios"><span class="quick-icon qi-blue">⇄</span><span><strong>Actualizar estados</strong><small>Gestionar el proceso de entrega</small></span><b>→</b></button>
+                        <button class="quick-action" data-go="seguimiento"><span class="quick-icon qi-green">⌕</span><span><strong>Consultar pedido</strong><small>Buscar por código de seguimiento</small></span><b>→</b></button>
+                        <button class="quick-action" data-go="reportes"><span class="quick-icon qi-orange">▥</span><span><strong>Reporte de envíos</strong><small>Consultar y exportar información</small></span><b>→</b></button>
+                        <div class="tip-box"><span>✦</span><div><strong>Consejo operativo</strong><p>Actualiza el estado de cada envío cuando cambie su situación para mantener informado al cliente.</p></div></div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- REGISTRAR -->
+            <section class="page-section" id="page-registrar">
+                <div class="welcome-row">
+                    <div><p class="eyebrow">GESTIÓN DE PEDIDOS</p><h1>Registrar un envío</h1><p class="page-subtitle">Completa los datos del pedido para generar su código único de seguimiento.</p></div>
+                    <span class="step-indicator"><span>01</span> Nuevo registro</span>
+                </div>
+
+                <div class="form-layout">
+                    <section class="panel form-panel">
+                        <div class="panel-heading form-panel-heading"><div><h2>Información del envío</h2><p>Los campos marcados con * son obligatorios.</p></div><span class="form-icon">▤</span></div>
+                        <form id="formEnvio" novalidate>
+                            <div class="form-section-title"><span>1</span><div><strong>Datos de las personas</strong><small>Identifica quién envía y quién recibe el pedido.</small></div></div>
+                            <div class="form-grid">
+                                <div class="field"><label for="remitente">Nombre del remitente *</label><input id="remitente" name="remitente" maxlength="100" required placeholder="Ej. María López"><small>Persona o negocio que realiza el envío.</small></div>
+                                <div class="field"><label for="destinatario">Nombre del destinatario *</label><input id="destinatario" name="destinatario" maxlength="100" required placeholder="Ej. Carlos Ramírez"><small>Persona que recibirá el pedido.</small></div>
+                            </div>
+                            <div class="form-divider"></div>
+                            <div class="form-section-title"><span>2</span><div><strong>Ruta del envío</strong><small>Indica el punto de origen y el destino del pedido.</small></div></div>
+                            <div class="form-grid">
+                                <div class="field"><label for="origen">Origen *</label><input id="origen" name="origen" maxlength="150" required placeholder="Ej. San Isidro, Lima"></div>
+                                <div class="field"><label for="destino">Destino *</label><input id="destino" name="destino" maxlength="150" required placeholder="Ej. Miraflores, Lima"></div>
+                            </div>
+                            <div class="form-divider"></div>
+                            <div class="form-section-title"><span>3</span><div><strong>Detalles del pedido</strong><small>Agrega una referencia que ayude a identificar el paquete.</small></div></div>
+                            <div class="field"><label for="descripcion">Descripción del pedido *</label><textarea id="descripcion" name="descripcion" rows="3" maxlength="500" required placeholder="Ej. Pedido de ropa, color y cantidad de productos..."></textarea><div class="field-bottom"><small>No incluyas contraseñas ni datos bancarios.</small><small id="contadorDescripcion">0/500</small></div></div>
+                            <div class="form-notice"><span>ⓘ</span><p>Al guardar, el sistema de demostración genera un código de seguimiento y registra la fecha de creación.</p></div>
+                            <div class="form-actions"><button type="reset" class="btn btn-secondary">Limpiar formulario</button><button type="submit" class="btn btn-primary">Guardar envío <span>→</span></button></div>
+                        </form>
+                    </section>
+
+                    <aside class="panel side-info-panel">
+                        <div class="side-info-illustration">▧<span>✓</span></div>
+                        <h3>¿Qué sucede después?</h3>
+                        <p>Cuando registres el pedido, podrás gestionar su avance y compartir su código con el cliente.</p>
+                        <div class="process-list">
+                            <div class="process-item"><span class="process-number">1</span><div><strong>Se genera un código</strong><small>Identificador único para consultar el envío.</small></div></div>
+                            <div class="process-item"><span class="process-number">2</span><div><strong>Se actualiza el estado</strong><small>Registrado, En envío o Entregado.</small></div></div>
+                            <div class="process-item"><span class="process-number">3</span><div><strong>El cliente consulta</strong><small>Puede revisar el seguimiento mediante su código.</small></div></div>
+                        </div>
+                        <button class="btn btn-outline btn-full" data-go="seguimiento">Ir a consulta de seguimiento</button>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- LISTA DE ENVÍOS -->
+            <section class="page-section" id="page-envios">
+                <div class="welcome-row">
+                    <div><p class="eyebrow">CONTROL OPERATIVO</p><h1>Gestión de envíos</h1><p class="page-subtitle">Consulta los pedidos, revisa su información y actualiza el estado de cada envío.</p></div>
+                    <button class="btn btn-primary" data-go="registrar">＋ Nuevo envío</button>
+                </div>
+                <div class="stats-strip">
+                    <div><span>Total de registros</span><strong id="listTotal">0</strong></div>
+                    <div><span>Registrados</span><strong id="listRegistrado">0</strong></div>
+                    <div><span>En envío</span><strong id="listTransito">0</strong></div>
+                    <div><span>Entregados</span><strong id="listEntregado">0</strong></div>
+                </div>
+                <section class="panel table-panel">
+                    <div class="panel-heading"><div><h2>Listado de pedidos</h2><p>Busca por código, remitente o destinatario.</p></div><button class="btn btn-secondary btn-small" id="btnExportar">⇩ Exportar reporte CSV</button></div>
+                    <div class="filters-row">
+                        <div class="search-field"><span>⌕</span><input id="filtroTexto" type="search" placeholder="Buscar envío..." aria-label="Buscar envío"></div>
+                        <select id="filtroEstado" aria-label="Filtrar por estado"><option value="">Todos los estados</option><option value="Registrado">Registrado</option><option value="En envío">En envío</option><option value="Entregado">Entregado</option></select>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="full-table">
+                            <thead><tr><th>CÓDIGO</th><th>REMITENTE</th><th>DESTINATARIO</th><th>RUTA</th><th>FECHA</th><th>ESTADO</th><th>ACCIONES</th></tr></thead>
+                            <tbody id="allTable"></tbody>
+                        </table>
+                    </div>
+                    <div class="empty-state hidden" id="allEmpty"><span>⌕</span><strong>No se encontraron envíos</strong><p>Prueba con otro término o registra un nuevo pedido.</p><button class="btn btn-secondary btn-small" id="btnLimpiarFiltros">Limpiar filtros</button></div>
+                    <div class="table-footer"><span id="tableCount">0 registros</span><span>LogiEnvíos · Prototipo</span></div>
+                </section>
+            </section>
+
+            <!-- CONSULTA PÚBLICA -->
+            <section class="page-section" id="page-seguimiento">
+                <div class="tracking-intro"><span class="tracking-symbol">⌕</span><p class="eyebrow">SEGUIMIENTO DE PEDIDOS</p><h1>¿Dónde está mi envío?</h1><p>Introduce el código de seguimiento que te proporcionó el negocio para consultar el estado de tu pedido.</p>
+                    <form class="tracking-search" id="formSeguimiento"><label class="sr-only" for="codigoBusqueda">Código de seguimiento</label><span>⌕</span><input id="codigoBusqueda" name="codigoBusqueda" maxlength="40" required placeholder="Ej. ENV-1001"><button class="btn btn-primary" type="submit">Consultar envío</button></form>
+                    <p class="tracking-privacy">ⓘ Consulta de demostración: utiliza un código generado en este prototipo.</p>
+                </div>
+                <div id="trackingResult" class="tracking-result hidden" aria-live="polite"></div>
+                <div class="tracking-placeholder" id="trackingPlaceholder"><div class="placeholder-art">▤<span>⌕</span></div><h2>Consulta el estado de tu pedido</h2><p>El resultado mostrará los datos básicos del envío y los cambios de estado registrados.</p></div>
+            </section>
+
+            <!-- REPORTES -->
+            <section class="page-section" id="page-reportes">
+                <div class="welcome-row">
+                    <div><p class="eyebrow">INFORMACIÓN DEL NEGOCIO</p><h1>Reportes de envíos</h1><p class="page-subtitle">Revisa el resumen de operaciones y exporta los registros disponibles.</p></div>
+                    <button class="btn btn-primary" id="btnExportarReportes">⇩ Exportar reporte CSV</button>
+                </div>
+                <div class="stats-grid report-stats">
+                    <article class="stat-card"><div class="stat-top"><span class="stat-icon icon-indigo">▤</span></div><p class="stat-label">Total de envíos</p><div class="stat-value" id="reportTotal">0</div><p class="stat-foot">Registros disponibles</p></article>
+                    <article class="stat-card"><div class="stat-top"><span class="stat-icon icon-amber">◷</span></div><p class="stat-label">Registrados</p><div class="stat-value" id="reportRegistrado">0</div><p class="stat-foot">Pendientes de despacho</p></article>
+                    <article class="stat-card"><div class="stat-top"><span class="stat-icon icon-blue">➜</span></div><p class="stat-label">En envío</p><div class="stat-value" id="reportTransito">0</div><p class="stat-foot">En proceso de entrega</p></article>
+                    <article class="stat-card"><div class="stat-top"><span class="stat-icon icon-green">✓</span></div><p class="stat-label">Entregados</p><div class="stat-value" id="reportEntregado">0</div><p class="stat-foot">Proceso completado</p></article>
+                </div>
+                <section class="panel report-panel">
+                    <div class="panel-heading"><div><h2>Distribución de envíos por estado</h2><p>Vista general de los registros guardados en este navegador.</p></div></div>
+                    <div id="reportBars" class="report-bars"></div>
+                    <div class="report-note"><span>ⓘ</span><p>Esta versión del navegador exporta un archivo CSV que puede abrirse con Excel. La exportación a un archivo .xlsx mediante Apache POI debe implementarse en el backend Java conectado a SQL Server.</p></div>
+                </section>
+            </section>
+
+            <footer class="page-footer"><span>© 2026 LogiEnvíos · Sistema de gestión y seguimiento de envíos</span><span>Versión de interfaz · Prototipo académico</span></footer>
+        </div>
+    </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop hidden" id="modalBackdrop" role="presentation">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header"><div><p class="eyebrow">LOGIENVIOS</p><h2 id="modalTitle">Detalle del envío</h2></div><button class="icon-button" id="btnCerrarModal" aria-label="Cerrar">✕</button></div>
+        <div id="modalContent"></div>
+        <div class="modal-footer"><button class="btn btn-secondary" id="btnCerrarModalFooter">Cerrar</button></div>
+    </section>
+</div>
+
+<div class="toast hidden" id="toast" role="status" aria-live="polite"><span id="toastIcon">✓</span><span id="toastMessage">Operación realizada.</span></div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+</body>
+</html>
